@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brasil Colonial: Açúcar, Escravidão e Crise Portuguesa — História · 7º ano</title>
+<style>
+:root{
+  --navy:#0f1a33;  --navy-2:#16244a;  --navy-3:#1e3057;
+  --gold:#c8a24a;  --gold-soft:#e0c074;
+  --paper:#f4f1e8; --paper-dim:#cdd3df;
+  --line:rgba(200,162,74,.28);
+  --c-ok:#8fbf6b;  --c-err:#c97b5a;  --c-info:#5b9bd5;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;min-height:100%;background:var(--navy);}
+body{
+  font-family:-apple-system,"Segoe UI",system-ui,Roboto,sans-serif;
+  color:var(--paper);
+  background:
+    radial-gradient(ellipse at 15% 10%, rgba(200,162,74,.08), transparent 55%),
+    radial-gradient(ellipse at 85% 90%, rgba(91,155,213,.06), transparent 55%),
+    var(--navy);
+  line-height:1.5;
+  padding-bottom:64px;
+}
+h1,h2,h3,.serif{font-family:Georgia,"Times New Roman",serif;}
+
+.container{
+  max-width:960px;
+  margin:0 auto;
+  padding:clamp(24px,4vw,44px) clamp(16px,4vw,32px);
+}
+
+/* Header */
+header{
+  border-bottom:1px solid var(--line);
+  padding-bottom:24px;
+  margin-bottom:28px;
+}
+.eyebrow{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-size:.72rem;
+  color:var(--gold-soft);
+  margin-bottom:10px;
+}
+.eyebrow::before{
+  content:"";
+  width:30px;
+  height:2px;
+  background:var(--gold);
+  flex:none;
+}
+h1.main-title{
+  font-size:clamp(1.8rem,4vw,2.7rem);
+  font-weight:400;
+  margin:0 0 10px 0;
+  line-height:1.12;
+}
+h1.main-title .gold{color:var(--gold); font-style:italic;}
+.subtitle{
+  color:var(--paper-dim);
+  font-size:.95rem;
+  margin:0;
+  max-width:780px;
+}
+
+/* Tabs Navigation */
+.tabs{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:28px;
+}
+.tab-btn{
+  background:var(--navy-2);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:14px 16px;
+  color:var(--paper-dim);
+  text-align:left;
+  cursor:pointer;
+  transition:all .25s ease;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  position:relative;
+}
+.tab-btn:hover{
+  background:var(--navy-3);
+  border-color:rgba(200,162,74,.55);
+}
+.tab-btn.active{
+  background:linear-gradient(145deg, var(--navy-3), var(--navy-2));
+  border:1px solid var(--gold);
+  color:var(--paper);
+  box-shadow:0 6px 20px rgba(0,0,0,.28);
+}
+.tab-btn.active::after{
+  content:"";
+  position:absolute;
+  bottom:-1px;
+  left:16px;
+  right:16px;
+  height:3px;
+  background:var(--gold);
+  border-radius:3px 3px 0 0;
+}
+.tab-tag{
+  font-size:.68rem;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:var(--gold-soft);
+}
+.tab-title{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:1rem;
+  line-height:1.25;
+}
+.tab-score{
+  font-size:.75rem;
+  color:var(--paper-dim);
+  margin-top:4px;
+  font-variant-numeric:tabular-nums;
+}
+
+/* Scoreboard / Status Bar */
+.status-bar{
+  background:var(--navy-2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:16px 20px;
+  margin-bottom:24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:16px;
+}
+.status-info h2{
+  font-size:1.2rem;
+  font-weight:400;
+  color:var(--gold-soft);
+  margin:0 0 2px 0;
+}
+.status-info p{
+  font-size:.82rem;
+  color:var(--paper-dim);
+  margin:0;
+}
+.status-metrics{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+.metric{
+  border-left:2px solid var(--gold);
+  padding-left:12px;
+}
+.metric-val{
+  font-family:Georgia,serif;
+  font-size:1.35rem;
+  color:var(--gold-soft);
+  display:block;
+  line-height:1.1;
+  font-variant-numeric:tabular-nums;
+}
+.metric-lbl{
+  font-size:.7rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--paper-dim);
+}
+.btn-reset, .btn-check{
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--line);
+  color:var(--gold-soft);
+  padding:9px 15px;
+  border-radius:8px;
+  font-size:.8rem;
+  cursor:pointer;
+  transition:all .2s;
+  font-family:inherit;
+}
+.btn-reset:hover{
+  background:rgba(200,162,74,.16);
+}
+.btn-check{
+  background:var(--gold);
+  color:var(--navy);
+  border-color:var(--gold);
+  font-weight:600;
+  margin-top:14px;
+}
+.btn-check:hover:not(:disabled){
+  background:var(--gold-soft);
+}
+.btn-check:disabled{
+  opacity:.42;
+  cursor:not-allowed;
+}
+
+/* Section Divider */
+.section-head{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:34px 0 16px 0;
+}
+.section-head h3{
+  font-size:1.1rem;
+  font-weight:400;
+  color:var(--gold-soft);
+  margin:0;
+  white-space:nowrap;
+}
+.section-head .line{
+  height:1px;
+  background:var(--line);
+  width:100%;
+}
+
+/* Question Card */
+.q-card{
+  background:var(--navy-2);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:20px 22px;
+  margin-bottom:16px;
+  transition:border-color .3s ease;
+}
+.q-card.answered-ok{border-color:rgba(143,191,107,.55);}
+.q-card.answered-partial{border-color:rgba(224,192,116,.55);}
+.q-card.answered-err{border-color:rgba(201,123,90,.55);}
+
+.q-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+  gap:10px;
+}
+.q-num{
+  font-size:.72rem;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:var(--gold);
+  font-weight:600;
+}
+.q-badge{
+  font-size:.72rem;
+  padding:2px 10px;
+  border-radius:99px;
+  font-weight:600;
+  display:none;
+}
+.q-card.answered-ok .q-badge.ok{display:inline-block; background:rgba(143,191,107,.16); color:var(--c-ok); border:1px solid rgba(143,191,107,.4);}
+.q-card.answered-partial .q-badge.partial{display:inline-block; background:rgba(224,192,116,.16); color:var(--gold-soft); border:1px solid rgba(224,192,116,.4);}
+.q-card.answered-err .q-badge.err{display:inline-block; background:rgba(201,123,90,.16); color:var(--c-err); border:1px solid rgba(201,123,90,.4);}
+
+.q-text{
+  font-size:.98rem;
+  color:var(--paper);
+  margin:0 0 16px 0;
+}
+
+/* MC Options */
+.options-list{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+.opt-btn{
+  background:rgba(15,26,51,.65);
+  border:1px solid rgba(205,211,223,.2);
+  border-radius:8px;
+  padding:11px 14px;
+  color:var(--paper);
+  font-size:.9rem;
+  text-align:left;
+  cursor:pointer;
+  display:flex;
+  align-items:flex-start;
+  gap:11px;
+  transition:all .2s ease;
+  font-family:inherit;
+  line-height:1.4;
+}
+.opt-btn:hover:not(:disabled){
+  background:var(--navy-3);
+  border-color:var(--gold);
+}
+.opt-btn:disabled{
+  cursor:default;
+}
+.opt-letter{
+  font-family:Georgia,serif;
+  font-weight:bold;
+  color:var(--gold-soft);
+  min-width:22px;
+  height:22px;
+  border-radius:50%;
+  border:1px solid var(--line);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:.78rem;
+  flex:none;
+  margin-top:1px;
+}
+
+/* States after answering */
+.opt-btn.correct{
+  background:rgba(143,191,107,.18);
+  border-color:var(--c-ok);
+  color:#eef7e6;
+}
+.opt-btn.correct .opt-letter{
+  background:var(--c-ok);
+  color:var(--navy);
+  border-color:var(--c-ok);
+}
+.opt-btn.wrong{
+  background:rgba(201,123,90,.18);
+  border-color:var(--c-err);
+  color:#fbe9e2;
+}
+.opt-btn.wrong .opt-letter{
+  background:var(--c-err);
+  color:var(--navy);
+  border-color:var(--c-err);
+}
+.opt-btn.dimmed{
+  opacity:.52;
+}
+
+/* Compound V/F Rows (4 items per question) */
+.vf-group{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.vf-row{
+  background:rgba(15,26,51,.65);
+  border:1px solid rgba(205,211,223,.18);
+  border-radius:8px;
+  padding:11px 14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  transition:all .2s ease;
+}
+.vf-row.row-ok{
+  border-color:rgba(143,191,107,.65);
+  background:rgba(143,191,107,.1);
+}
+.vf-row.row-err{
+  border-color:rgba(201,123,90,.65);
+  background:rgba(201,123,90,.1);
+}
+.vf-stmt{
+  font-size:.89rem;
+  color:var(--paper);
+  line-height:1.42;
+  flex:1;
+}
+.vf-stmt .roman{
+  font-family:Georgia,serif;
+  color:var(--gold-soft);
+  font-weight:bold;
+  margin-right:6px;
+}
+.vf-toggles{
+  display:flex;
+  gap:6px;
+  flex:none;
+}
+.vf-pill{
+  width:38px;
+  height:32px;
+  border-radius:6px;
+  border:1px solid rgba(205,211,223,.25);
+  background:var(--navy-2);
+  color:var(--paper-dim);
+  font-family:Georgia,serif;
+  font-weight:bold;
+  font-size:.82rem;
+  cursor:pointer;
+  transition:all .18s ease;
+}
+.vf-pill:hover:not(:disabled){
+  border-color:var(--gold);
+  color:var(--paper);
+}
+.vf-pill.selected{
+  background:var(--gold);
+  color:var(--navy);
+  border-color:var(--gold);
+}
+.vf-pill.res-correct{
+  background:var(--c-ok);
+  color:var(--navy);
+  border-color:var(--c-ok);
+}
+.vf-pill.res-wrong{
+  background:var(--c-err);
+  color:var(--navy);
+  border-color:var(--c-err);
+}
+.vf-pill:disabled{
+  cursor:default;
+}
+.vf-ans-tag{
+  font-size:.74rem;
+  font-weight:600;
+  margin-left:6px;
+  white-space:nowrap;
+}
+.vf-ans-tag.ok{color:var(--c-ok);}
+.vf-ans-tag.err{color:var(--c-err);}
+
+/* Column Matching Questions */
+.match-layout{
+  display:grid;
+  grid-template-columns:1fr 1.25fr;
+  gap:16px;
+  align-items:start;
+}
+.match-col-a{
+  background:rgba(15,26,51,.55);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:12px 14px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.match-col-title{
+  font-size:.72rem;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:var(--gold-soft);
+  border-bottom:1px solid var(--line);
+  padding-bottom:6px;
+  margin-bottom:2px;
+}
+.col-a-item{
+  font-size:.88rem;
+  line-height:1.38;
+  display:flex;
+  gap:8px;
+  align-items:flex-start;
+}
+.col-a-badge{
+  font-family:Georgia,serif;
+  font-weight:bold;
+  color:var(--navy);
+  background:var(--gold-soft);
+  min-width:22px;
+  height:22px;
+  border-radius:5px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:.78rem;
+  flex:none;
+  margin-top:1px;
+}
+.match-col-b{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+.match-row{
+  background:rgba(15,26,51,.65);
+  border:1px solid rgba(205,211,223,.18);
+  border-radius:8px;
+  padding:10px 12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  transition:all .2s ease;
+}
+.match-row.row-ok{
+  border-color:rgba(143,191,107,.65);
+  background:rgba(143,191,107,.1);
+}
+.match-row.row-err{
+  border-color:rgba(201,123,90,.65);
+  background:rgba(201,123,90,.1);
+}
+.match-select{
+  background:var(--navy-2);
+  border:1px solid var(--gold);
+  color:var(--gold-soft);
+  border-radius:6px;
+  padding:5px 8px;
+  font-family:Georgia,serif;
+  font-weight:bold;
+  font-size:.85rem;
+  cursor:pointer;
+  flex:none;
+}
+.match-select:disabled{
+  opacity:.9;
+  cursor:default;
+}
+.match-row.row-ok .match-select{
+  border-color:var(--c-ok);
+  color:var(--c-ok);
+}
+.match-row.row-err .match-select{
+  border-color:var(--c-err);
+  color:var(--c-err);
+}
+.match-desc{
+  font-size:.87rem;
+  color:var(--paper);
+  line-height:1.38;
+  flex:1;
+}
+
+/* Feedback box */
+.feedback{
+  margin-top:14px;
+  padding:12px 15px;
+  border-radius:8px;
+  font-size:.86rem;
+  line-height:1.5;
+  display:none;
+  border-left:3px solid var(--gold);
+  background:rgba(15,26,51,.75);
+  color:var(--paper-dim);
+}
+.feedback.show{display:block; animation:fadeIn .25s ease;}
+.feedback strong{color:var(--gold-soft);}
+
+/* Final Summary Banner */
+.summary-box{
+  margin-top:28px;
+  background:linear-gradient(135deg, var(--navy-2), var(--navy-3));
+  border:1px solid var(--gold);
+  border-radius:12px;
+  padding:22px 24px;
+  display:none;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:16px;
+}
+.summary-box.show{display:flex;}
+.summary-box h4{
+  font-size:1.25rem;
+  font-weight:400;
+  color:var(--gold-soft);
+  margin:0 0 4px 0;
+}
+.summary-box p{
+  margin:0;
+  font-size:.9rem;
+  color:var(--paper-dim);
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(4px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+@media (max-width:740px){
+  .tabs{grid-template-columns:1fr;}
+  .match-layout{grid-template-columns:1fr;}
+  .status-bar{flex-direction:column; align-items:flex-start;}
+  .vf-row{flex-direction:column; align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="eyebrow">7º ano · História · Exercícios Interativos</div>
+    <h1 class="main-title">Brasil Colonial: <span class="gold">Açúcar, Escravidão e Crise</span></h1>
+    <p class="subtitle">Selecione o tema trabalhado na aula. Cada aba contém <strong>18 questões</strong>: 10 de múltipla escolha (A–D), 5 de Verdadeiro ou Falso composto (4 itens cada) e 3 de associação entre colunas.</p>
+  </header>
+
+  <nav class="tabs" id="tabs-nav" role="tablist">
+    <button class="tab-btn active" data-tab="0" role="tab" aria-selected="true">
+      <span class="tab-tag">Unidade 5 · Tema 4</span>
+      <span class="tab-title">Açúcar: o principal negócio da Colônia</span>
+      <span class="tab-score" id="tab-score-0">0 / 18 concluídas</span>
+    </button>
+    <button class="tab-btn" data-tab="1" role="tab" aria-selected="false">
+      <span class="tab-tag">Unidade 6 · Tema 3</span>
+      <span class="tab-title">A escravidão africana no Brasil</span>
+      <span class="tab-score" id="tab-score-1">0 / 18 concluídas</span>
+    </button>
+    <button class="tab-btn" data-tab="2" role="tab" aria-selected="false">
+      <span class="tab-tag">Unidade 7 · Tema 2</span>
+      <span class="tab-title">A crise e a dependência portuguesa</span>
+      <span class="tab-score" id="tab-score-2">0 / 18 concluídas</span>
+    </button>
+  </nav>
+
+  <div id="quiz-workspace"></div>
+</div>
+
+<script>
+const QUIZ_DATA = [
+  {
+    id: 0,
+    unit: "Unidade 5 · Tema 4",
+    title: "Açúcar: o principal negócio da Colônia",
+    desc: "Organização da produção açucareira, estrutura dos engenhos e sociedade colonial.",
+    mc: [
+      {
+        q: "Por que o cultivo da cana-de-açúcar obteve maior sucesso na faixa litorânea do Nordeste brasileiro, especialmente em Pernambuco e na Bahia?",
+        opts: [
+          "Pela combinação entre o clima tropical quente e úmido, o solo fértil de massapê e a menor distância marítima até a Europa.",
+          "Pela presença de grandes rios navegáveis que ligavam o litoral diretamente às minas de ouro do interior.",
+          "Porque a região possuía mão de obra assalariada europeia abundante e terras divididas em pequenas propriedades familiares.",
+          "Porque o clima semiárido do sertão nordestino impedia pragas agrícolas e dispensava o uso de chuvas regulares."
+        ],
+        ans: 0,
+        exp: "O solo escuro e muito fértil chamado massapê, aliado ao clima quente e úmido e à proximidade dos portos europeus (barateando o transporte), garantiu o sucesso dos engenhos em Pernambuco e na Bahia."
+      },
+      {
+        q: "Sobre o papel dos comerciantes e banqueiros holandeses (flamengos) no negócio do açúcar brasileiro durante o século XVI, é correto afirmar que eles:",
+        opts: [
+          "Proibiam a entrada do açúcar português na Europa para proteger suas próprias plantações na Ásia.",
+          "Controlavam exclusivamente o trabalho agrícola nos canaviais de São Vicente e do Rio de Janeiro.",
+          "Financiavam a montagem dos engenhos, refinavam o açúcar bruto na Europa e o distribuíam no mercado europeu.",
+          "Eram responsáveis apenas pela captura de indígenas no interior do Brasil para vendê-los aos senhores de engenho."
+        ],
+        ans: 2,
+        exp: "Como Portugal não tinha capital suficiente nem estrutura de refino, estabeleceu uma parceria com os holandeses, que financiavam equipamentos, refinavam o açúcar e o distribuíam na Europa."
+      },
+      {
+        q: "Na estrutura física de um engenho colonial, qual era a função específica da 'casa de purgar'?",
+        opts: [
+          "Servir de moradia fortificada para o senhor de engenho, sua família e os padres capelães.",
+          "Branquear e secar o açúcar já cozido em formas de barro, separando o melado das impurezas.",
+          "Moer a cana recém-colhida utilizando a força da água ou de bois para extrair o caldo.",
+          "Alojar os trabalhadores escravizados durante a noite sob vigilância constante dos feitores."
+        ],
+        ans: 1,
+        exp: "Após a moenda (extração do caldo) e a casa das caldeiras (fervura), o açúcar ia para a casa de purgar, onde era colocado em formas cônicas para branquear e secar."
+      },
+      {
+        q: "A sociedade açucareira colonial era marcada pelo poder patriarcal dos senhores de engenho. Isso significa que o senhor de engenho:",
+        opts: [
+          "Dividia as decisões políticas da vila em igualdade de condições com os lavradores e os artesãos.",
+          "Submetia-se diariamente às ordens diretas do mestre de açúcar e dos capitães do mato.",
+          "Não possuía influência fora de suas terras, pois as Câmaras Municipais eram controladas pelos escravizados libertos.",
+          "Concentrava autoridade máxima sobre familiares, agregados e escravizados, além de dominar a política local nas Câmaras Municipais."
+        ],
+        ans: 3,
+        exp: "O senhor de engenho exercia poder econômico, social e político (como 'homem bom' nas Câmaras Municipais), concentrando autoridade patriarcal na casa-grande."
+      },
+      {
+        q: "Quem eram os 'lavradores de cana' na sociedade do engenho colonial?",
+        opts: [
+          "Produtores livres que cultivavam cana em terras próprias ou arrendadas, mas precisavam moê-la no engenho de um senhor em troca de parte da produção.",
+          "Trabalhadores africanos recém-chegados que recebiam pequenas parcelas de terra após cinco anos de serviço.",
+          "Funcionários enviados pelo rei de Portugal para cobrar o quinto sobre cada caixa de açúcar embarcada.",
+          "Comerciantes holandeses que moravam na casa-grande para fiscalizar a qualidade do açúcar branco."
+        ],
+        ans: 0,
+        exp: "Os lavradores de cana eram homens livres (proprietários de pequenas terras ou arrendatários) que não tinham recursos para montar um engenho próprio e entregavam parte do açúcar ao senhor pela moagem."
+      },
+      {
+        q: "Entre os trabalhadores livres e assalariados do engenho, qual profissional era considerado o mais importante e bem remunerado, sendo tratado com grande respeito pelo senhor?",
+        opts: [
+          "O feitor, encarregado de vigiar os escravizados e aplicar castigos físicos.",
+          "O barqueiro, responsável por levar as caixas de açúcar até os navios no porto.",
+          "O mestre de açúcar, que controlava o ponto exato do cozimento do caldo e a qualidade final do produto.",
+          "O ferreiro, que consertava os eixos dos carros de boi e as ferramentas do canavial."
+        ],
+        ans: 2,
+        exp: "O mestre de açúcar dominava a técnica mais delicada da produção: saber o momento exato de retirar o caldo das caldeiras para que o açúcar cristalizasse sem queimar."
+      },
+      {
+        q: "Sobre o modelo econômico conhecido como 'plantation', adotado na produção açucareira colonial, assinale a alternativa que reúne suas quatro características básicas:",
+        opts: [
+          "Minifúndio, policultura de subsistência, trabalho assalariado e mercado interno.",
+          "Latifúndio, monocultura, mão de obra escravizada e produção voltada para a exportação.",
+          "Pequena propriedade, rotação de culturas, servidão feudal e comércio local.",
+          "Propriedade estatal, extrativismo vegetal, trabalho livre e abastecimento das vilas."
+        ],
+        ans: 1,
+        exp: "O sistema de plantation baseava-se em grandes propriedades (latifúndios), cultivo de um único produto principal (monocultura), trabalho escravizado e exportação para a metrópole."
+      },
+      {
+        q: "Além do trabalho pesado nos canaviais e na casa de engenho, qual outra função os africanos escravizados desempenhavam no complexo açucareiro?",
+        opts: [
+          "Ocupavam os cargos de juízes e vereadores nas Câmaras Municipais das vilas açucareiras.",
+          "Administravam os empréstimos bancários feitos entre os senhores de engenho e os holandeses.",
+          "Eram proibidos de entrar na casa-grande ou de aprender qualquer ofício artesanal.",
+          "Atuavam nos serviços domésticos da casa-grande (cozinha, limpeza, amas de leite) e em ofícios como carpintaria e ferraria."
+        ],
+        ans: 3,
+        exp: "Os escravizados sustentavam todas as atividades do engenho: do plantio e moagem aos ofícios especializados (ferreiros, carpinteiros) e trabalhos domésticos na casa-grande."
+      },
+      {
+        q: "Por que a montagem de um engenho exigia altíssimos investimentos financeiros no início da colonização?",
+        opts: [
+          "Porque a Coroa portuguesa obrigava os senhores a pagarem salários em ouro a todos os trabalhadores.",
+          "Porque a cana-de-açúcar demorava dez anos para crescer e só podia ser colhida uma única vez.",
+          "Porque era necessário adquirir grandes terras, construir instalações complexas, comprar equipamentos de cobre/ferro e adquirir escravizados.",
+          "Porque os engenhos precisavam ser construídos no topo de montanhas distantes do litoral."
+        ],
+        ans: 2,
+        exp: "Montar um engenho demandava capital elevado para terras, construções (moenda, fornalhas, casa de purgar), tachos de cobre e compra de mão de obra escravizada."
+      },
+      {
+        q: "Qual era a principal diferença entre os 'lavradores proprietários' e os 'lavradores arrendatários'?",
+        opts: [
+          "Os proprietários eram escravizados libertos, enquanto os arrendatários eram nobres portugueses.",
+          "Os proprietários eram donos da terra onde plantavam (ficando com metade do açúcar), enquanto os arrendatários alugavam terras do engenho (ficando com uma parcela menor).",
+          "Os proprietários trabalhavam apenas nas cidades, enquanto os arrendatários comandavam a casa de purgar.",
+          "Não havia diferença: ambos entregavam 100% da colheita gratuitamente ao senhor de engenho."
+        ],
+        ans: 1,
+        exp: "Os lavradores proprietários tinham suas próprias terras (dividindo o açúcar produzido meio a meio com o dono do engenho), já os arrendatários pagavam pelo uso da terra do engenho e ficavam com 1/3 ou 1/4."
+      }
+    ],
+    vf: [
+      {
+        q: "Julgue cada afirmativa sobre a implantação e a economia do açúcar no Brasil colonial como Verdadeira (V) ou Falsa (F):",
+        items: [
+          { text: "O solo de massapê, encontrado no litoral nordestino, era escuro, argiloso e muito fértil para o cultivo da cana.", ans: "V" },
+          { text: "Portugal tinha domínio absoluto sobre o refino e a venda do açúcar na Europa, proibindo qualquer participação holandesa.", ans: "F" },
+          { text: "Na primeira metade do século XVI, o açúcar era um produto raro e de altíssimo valor no mercado europeu.", ans: "V" },
+          { text: "A produção açucareira brasileira voltava-se prioritariamente para o abastecimento interno das vilas indígenas.", ans: "F" }
+        ],
+        exp: "I (V) e III (V) estão corretas. II (F): os holandeses financiavam, refinavam e distribuíam o açúcar português. IV (F): o modelo de plantation era voltado para a exportação europeia."
+      },
+      {
+        q: "Analise as proposições abaixo a respeito das etapas e instalações físicas de um engenho colonial:",
+        items: [
+          { text: "Na moenda, a cana colhida era esmagada por cilindros movidos por força hidráulica (água) ou tração animal (bois).", ans: "V" },
+          { text: "Na casa das caldeiras, o caldo extraído era fervido em grandes tachos de cobre até atingir o ponto de melado.", ans: "V" },
+          { text: "Na casa de purgar, o açúcar era misturado com água salgada para escurecer e ganhar maior peso antes do embarque.", ans: "F" },
+          { text: "Além da área fabril, o engenho possuía a casa-grande, a senzala, os canaviais e geralmente uma capela.", ans: "V" }
+        ],
+        exp: "I (V), II (V) e IV (V) descrevem fielmente o engenho. III (F): na casa de purgar o açúcar era branqueado e seco em formas de barro, separando o melado."
+      },
+      {
+        q: "Sobre a estrutura social e o poder nos engenhos coloniais, julgue os itens a seguir:",
+        items: [
+          { text: "Os senhores de engenho formavam a elite colonial e exerciam poder político local por meio das Câmaras Municipais.", ans: "V" },
+          { text: "A sociedade açucareira caracterizava-se por grande mobilidade social, permitindo que qualquer escravizado se tornasse senhor de engenho.", ans: "F" },
+          { text: "O poder patriarcal concentrava nas mãos do senhor de engenho a autoridade sobre sua família, agregados e trabalhadores.", ans: "V" },
+          { text: "As mulheres da elite açucareira dirigiam as Câmaras Municipais e comandavam as expedições militares da colônia.", ans: "F" }
+        ],
+        exp: "I (V) e III (V) estão corretas. II (F): era uma sociedade rígida e hierarquizada. IV (F): o poder político formal era monopólio dos homens livres e proprietários ('homens bons')."
+      },
+      {
+        q: "Avalie as afirmações sobre os trabalhadores livres e os lavradores de cana no complexo açucareiro:",
+        items: [
+          { text: "Os lavradores de cana plantavam cana-de-açúcar, mas precisavam usar o engenho de um senhor para moer sua colheita.", ans: "V" },
+          { text: "O mestre de açúcar era um trabalhador escravizado que não recebia qualquer reconhecimento técnico pela qualidade do açúcar.", ans: "F" },
+          { text: "O feitor era responsável por fiscalizar o ritmo de trabalho nos canaviais e aplicar castigos aos escravizados.", ans: "V" },
+          { text: "Ferreiros, carpinteiros e purgadores desempenhavam funções técnicas essenciais para o funcionamento contínuo do engenho.", ans: "V" }
+        ],
+        exp: "I (V), III (V) e IV (V) estão corretas. II (F): o mestre de açúcar era um trabalhador livre, especializado e o mais bem remunerado do engenho."
+      },
+      {
+        q: "Julgue os itens sobre o trabalho dos africanos escravizados e a transição da mão de obra na Colônia:",
+        items: [
+          { text: "No início da colonização, os portugueses utilizaram amplamente a mão de obra indígena escravizada nas lavouras.", ans: "V" },
+          { text: "A substituição gradual da mão de obra indígena pela africana esteve ligada também aos altos lucros gerados pelo tráfico atlântico.", ans: "V" },
+          { text: "Os africanos escravizados trabalhavam exclusivamente no corte da cana, sendo proibidos de atuar como artesãos ou domésticos.", ans: "F" },
+          { text: "A senzala era um alojamento coletivo precário, vigiado constantemente, onde os escravizados descansavam após jornadas exaustivas.", ans: "V" }
+        ],
+        exp: "I (V), II (V) e IV (V) estão corretas. III (F): os escravizados também exerciam ofícios artesanais (ferreiros, carpinteiros) e serviços domésticos na casa-grande."
+      }
+    ],
+    match: [
+      {
+        q: "Associe cada espaço físico do engenho colonial (Coluna A) à sua respectiva função (Coluna B):",
+        colA: [
+          { id: "A", text: "Casa-grande" },
+          { id: "B", text: "Senzala" },
+          { id: "C", text: "Moenda" },
+          { id: "D", text: "Casa de purgar" }
+        ],
+        colB: [
+          { text: "Alojamento coletivo e precário destinado aos trabalhadores escravizados.", ans: "B" },
+          { text: "Local onde a cana era esmagada para extrair o caldo.", ans: "C" },
+          { text: "Moradia do senhor de engenho e sede administrativa da propriedade.", ans: "A" },
+          { text: "Instalação onde o açúcar cozido era colocado em formas para branquear e secar.", ans: "D" }
+        ],
+        exp: "Associação correta: B (Senzala = alojamento), C (Moenda = esmagamento da cana), A (Casa-grande = moradia/poder senhorial) e D (Casa de purgar = branqueamento/secagem)."
+      },
+      {
+        q: "Relacione os grupos sociais da sociedade açucareira (Coluna A) às suas características (Coluna B):",
+        colA: [
+          { id: "A", text: "Senhores de engenho" },
+          { id: "B", text: "Lavradores de cana" },
+          { id: "C", text: "Mestre de açúcar" },
+          { id: "D", text: "Africanos escravizados" }
+        ],
+        colB: [
+          { text: "Trabalhador livre especializado que controlava o ponto do cozimento e a qualidade do açúcar.", ans: "C" },
+          { text: "Maioria da população colonial; base de todo o trabalho agrícola, fabril e doméstico.", ans: "D" },
+          { text: "Elite proprietária de terras, instalações e cativos, com grande poder político local.", ans: "A" },
+          { text: "Produtores livres sem engenho próprio que dividiam o açúcar produzido com o dono da moenda.", ans: "B" }
+        ],
+        exp: "Associação correta: C (Mestre de açúcar), D (Africanos escravizados), A (Senhores de engenho) e B (Lavradores de cana)."
+      },
+      {
+        q: "Conecte cada conceito-chave da economia açucareira (Coluna A) à sua definição correta (Coluna B):",
+        colA: [
+          { id: "A", text: "Plantation" },
+          { id: "B", text: "Massapê" },
+          { id: "C", text: "Parceria flamenga" },
+          { id: "D", text: "Câmaras Municipais" }
+        ],
+        colB: [
+          { text: "Financiamento, refino e distribuição do açúcar brasileiro realizados pelos holandeses na Europa.", ans: "C" },
+          { text: "Órgãos de administração política local dominados pelos senhores de engenho ('homens bons').", ans: "D" },
+          { text: "Sistema baseado em latifúndio, monocultura, trabalho escravizado e exportação.", ans: "A" },
+          { text: "Solo escuro e muito fértil do litoral nordestino ideal para o cultivo da cana-de-açúcar.", ans: "B" }
+        ],
+        exp: "Associação correta: C (Parceria flamenga), D (Câmaras Municipais), A (Plantation) e B (Massapê)."
+      }
+    ]
+  },
+  {
+    id: 1,
+    unit: "Unidade 6 · Tema 3",
+    title: "A escravidão africana no Brasil",
+    desc: "Tráfico atlântico, povos sudaneses e bantos, cotidiano, resistência e identidade cultural.",
+    mc: [
+      {
+        q: "Estima-se que mais de 10 milhões de africanos tenham sido trazidos à força para a América pelo tráfico atlântico. Qual foi a posição do Brasil nesse comércio?",
+        opts: [
+          "Recebeu menos de 5% dos africanos traficados, pois utilizou apenas indígenas até a Independência.",
+          "Foi o maior destino de africanos escravizados nas Américas, recebendo cerca de 4 milhões de pessoas.",
+          "Recebeu escravizados apenas no século XIX, após o fim da produção de açúcar no Nordeste.",
+          "Proibiu o tráfico atlântico logo no início da colonização por pressão dos senhores de engenho."
+        ],
+        ans: 1,
+        exp: "O Brasil foi o território americano que mais recebeu africanos escravizados (cerca de 4 milhões de pessoas ao longo de mais de três séculos)."
+      },
+      {
+        q: "Os africanos trazidos ao Brasil pertenciam a povos muito diversos, agrupados pelos historiadores em dois grandes conjuntos linguístico-culturais. Quais são eles?",
+        opts: [
+          "Astecas e Incas.",
+          "Fenícios e Cartagineses.",
+          "Tupis e Guaranis.",
+          "Sudaneses e Bantos."
+        ],
+        ans: 3,
+        exp: "Os dois grandes grupos trazidos ao Brasil foram os sudaneses (da África Ocidental/Golfo da Guiné, como iorubás, jejes e hauçás) e os bantos (da África Central e Austral, como congos e angolas)."
+      },
+      {
+        q: "Sobre os povos sudaneses (como os iorubás/nagôs, jejes e hauçás), é correto afirmar que:",
+        opts: [
+          "Eram originários da região do Golfo da Guiné, destacavam-se pela metalurgia, escultura e cidades organizadas, e foram levados em grande número para a Bahia.",
+          "Vinham exclusivamente de Moçambique e não possuíam nenhuma organização urbana ou religiosa antes da chegada dos europeus.",
+          "Eram povos nômades do deserto do Saara que desconheciam a agricultura e o comércio.",
+          "Foram enviados apenas para o sul do Brasil e nunca tiveram contato com outras culturas africanas."
+        ],
+        ans: 0,
+        exp: "Os sudaneses vinham da África Ocidental (atuais Nigéria, Benin, Gana), onde desenvolveram reinos urbanos como Ifé e Oió, e tiveram forte concentração na Bahia."
+      },
+      {
+        q: "Qual foi a importância dos povos bantos (como congos, angolas, benguelas e moçambiques) na formação cultural do Brasil?",
+        opts: [
+          "Introduziram a escrita alfabética latina nas aldeias indígenas do interior.",
+          "Impediram qualquer contato entre a língua portuguesa e os idiomas africanos.",
+          "Influenciaram profundamente o vocabulário do português falado no Brasil (como moleque, cafuné e quitanda), além da música, dança e técnicas agrícolas.",
+          "Fundaram as primeiras universidades da América Portuguesa em Salvador e Recife."
+        ],
+        ans: 2,
+        exp: "Os bantos foram trazidos em grande número para Pernambuco, Rio de Janeiro e Sudeste, deixando marcas profundas na língua portuguesa, na culinária, na música e na religiosidade."
+      },
+      {
+        q: "Por que os traficantes e senhores procuravam separar pessoas da mesma família ou do mesmo grupo étnico ao vendê-las no Brasil?",
+        opts: [
+          "Para facilitar o aprendizado rápido da língua latina nas igrejas.",
+          "Para dificultar a comunicação, a união e a organização de revoltas contra a escravidão.",
+          "Porque a lei portuguesa exigia que cada engenho tivesse apenas um trabalhador africano.",
+          "Para garantir que cada escravizado recebesse um lote de terra individual."
+        ],
+        ans: 1,
+        exp: "A separação intencional de famílias e grupos de mesma língua buscava quebrar laços de solidariedade e reduzir o risco de rebeliões."
+      },
+      {
+        q: "Nas cidades coloniais, muitos africanos e seus descendentes trabalhavam como 'escravos de ganho'. Como funcionava essa modalidade de trabalho?",
+        opts: [
+          "Eles trabalhavam nas ruas como vendedores, carregadores ou artesãos e deviam entregar uma quantia fixa diária ou semanal ('jornal') ao seu senhor.",
+          "Eles eram proprietários dos armazéns portuários e contratavam trabalhadores europeus assalariados.",
+          "Eles recebiam terras da Coroa portuguesa para plantar café sem precisar prestar contas a ninguém.",
+          "Eles trabalhavam apenas dentro dos conventos e eram proibidos de circular pelas ruas das vilas."
+        ],
+        ans: 0,
+        exp: "Os escravos de ganho circulavam pelas cidades exercendo diversos ofícios urbanos e entregavam parte ou a totalidade combinada dos ganhos (o 'jornal') aos senhores."
+      },
+      {
+        q: "Sobre os quilombos formados no Brasil colonial — como o famoso Quilombo dos Palmares —, é correto afirmar que:",
+        opts: [
+          "Eram prisões construídas pelo governo português para isolar os escravizados rebeldes.",
+          "Viviam totalmente isolados no meio da floresta, sem jamais manter comércio ou contato com povoados vizinhos.",
+          "Aceitavam apenas africanos nascidos em Portugal e expulsavam indígenas ou brancos pobres.",
+          "Eram comunidades de resistência formadas por escravizados fugidos, que também acolhiam indígenas e brancos pobres e mantinham trocas comerciais com vizinhos."
+        ],
+        ans: 3,
+        exp: "Os quilombos eram núcleos organizados de resistência e liberdade; mantinham agricultura própria, comércio com populações vizinhas e abrigavam diferentes grupos marginalizados."
+      },
+      {
+        q: "O que foi o 'sincretismo religioso' praticado pelos africanos escravizados e seus descendentes no Brasil?",
+        opts: [
+          "O abandono definitivo de todas as tradições africanas e a conversão espontânea ao protestantismo holandês.",
+          "A proibição criada pelos senhores de engenho para que nenhum escravizado fosse batizado na Igreja Católica.",
+          "A associação entre divindades africanas (orixás e inquices) e santos católicos como forma de preservar suas crenças diante da imposição do catolicismo.",
+          "A criação de uma religião oficial imposta pelo rei de Portugal para substituir o catolicismo na colônia."
+        ],
+        ans: 2,
+        exp: "Diante da obrigação de seguir o catolicismo, os africanos associaram seus orixás e inquices aos santos católicos, preservando sua espiritualidade e dando origem a religiões como o Candomblé e a Umbanda."
+      },
+      {
+        q: "Além das fugas e da formação de quilombos, quais eram as formas de resistência cotidiana dentro dos engenhos e fazendas?",
+        opts: [
+          "A quebra de ferramentas, a sabotagem da produção, a diminuição do ritmo de trabalho e as negociações por melhores condições.",
+          "A eleição de deputados escravizados para o Parlamento em Lisboa.",
+          "A compra imediata de todos os engenhos da Bahia pelos trabalhadores das senzalas.",
+          "O pedido de intervenção militar da Espanha para acabar com a lavoura de cana."
+        ],
+        ans: 0,
+        exp: "A resistência ocorria também no dia a dia por meio da sabotagem de equipamentos, lentidão proposital no trabalho ('corpo mole'), preservação cultural e negociações."
+      },
+      {
+        q: "Como eram os navios negreiros (também chamados de 'tumbeiros') que realizavam a travessia do Oceano Atlântico?",
+        opts: [
+          "Embarcações rápidas e confortáveis que transportavam poucos passageiros em cabines individuais.",
+          "Navios militares espanhóis que levavam africanos livres para estudar nas universidades europeias.",
+          "Barcos fluviais que navegavam apenas entre o Rio de Janeiro e São Vicente.",
+          "Embarcações superlotadas e insalubres, onde a falta de higiene, água e alimentos provocava doenças e alta mortalidade."
+        ],
+        ans: 3,
+        exp: "Chamados de 'tumbeiros' (tumbas flutuantes), esses navios transportavam pessoas acorrentadas em porões insalubres, resultando em elevadas taxas de morte durante a travessia."
+      }
+    ],
+    vf: [
+      {
+        q: "Julgue as afirmativas sobre o tráfico atlântico de africanos para o Brasil como Verdadeiras (V) ou Falsas (F):",
+        items: [
+          { text: "Cerca de 4 milhões de africanos foram trazidos à força para o Brasil, tornando-o o maior destino do tráfico nas Américas.", ans: "V" },
+          { text: "Produtos brasileiros como o tabaco (fumo) e a aguardente (cachaça) eram usados como moeda de troca por cativos na costa africana.", ans: "V" },
+          { text: "Os navios tumbeiros ofereciam assistência médica rigorosa, evitando mortes durante a travessia do Atlântico.", ans: "F" },
+          { text: "Nos portos brasileiros, os africanos recém-chegados eram examinados e vendidos em leilões públicos como mercadorias.", ans: "V" }
+        ],
+        exp: "I (V), II (V) e IV (V) estão corretas. III (F): os tumbeiros eram insalubres e superlotados, registrando altíssimas taxas de mortalidade."
+      },
+      {
+        q: "Sobre os povos sudaneses e bantos trazidos para o Brasil, julgue cada item a seguir:",
+        items: [
+          { text: "Os iorubás (nagôs), jejes e hauçás pertenciam ao grupo dos sudaneses, originários da região do Golfo da Guiné.", ans: "V" },
+          { text: "Entre os sudaneses havia reinos urbanos organizados, como Ifé e Oió, com avançada metalurgia e escultura em bronze.", ans: "V" },
+          { text: "Os povos bantos vinham da África Central e Austral (como Congo, Angola e Moçambique) e influenciaram fortemente o português do Brasil.", ans: "V" },
+          { text: "Os povos bantos foram enviados exclusivamente para a Amazônia, nunca tendo chegado a Pernambuco ou ao Rio de Janeiro.", ans: "F" }
+        ],
+        exp: "I (V), II (V) e III (V) estão corretas. IV (F): os bantos tiveram grande concentração em Pernambuco, no Rio de Janeiro e em todo o Sudeste."
+      },
+      {
+        q: "Analise as afirmações sobre o cotidiano de trabalho e violência no sistema escravista:",
+        items: [
+          { text: "As jornadas de trabalho nos engenhos podiam durar de 14 a 18 horas diárias sob vigilância dos feitores.", ans: "V" },
+          { text: "O medo dos castigos físicos (como o tronco e o chicote) era utilizado pelos senhores como mecanismo de controle e submissão.", ans: "V" },
+          { text: "Os 'escravos de ganho' viviam isolados nas fazendas do interior e nunca circulavam pelas áreas urbanas.", ans: "F" },
+          { text: "A separação intencional de familiares e pessoas da mesma etnia buscava dificultar a comunicação e a organização de revoltas.", ans: "V" }
+        ],
+        exp: "I (V), II (V) e IV (V) estão corretas. III (F): os escravos de ganho atuavam justamente nas cidades, exercendo ofícios nas ruas e entregando o 'jornal' ao senhor."
+      },
+      {
+        q: "Julgue os itens referentes às formas de resistência e aos quilombos no Brasil colonial:",
+        items: [
+          { text: "A resistência à escravidão incluía tanto ações cotidianas (sabotagem e corpo mole) quanto fugas e rebeliões.", ans: "V" },
+          { text: "Os quilombos eram comunidades autônomas que viviam totalmente isoladas, sem manter comércio com povoados vizinhos.", ans: "F" },
+          { text: "O Quilombo dos Palmares, situado na Serra da Barriga (atual Alagoas), foi o maior e mais duradouro quilombo do Brasil.", ans: "V" },
+          { text: "Além de africanos fugidos, muitos quilombos abrigavam indígenas e brancos pobres perseguidos pelas autoridades.", ans: "V" }
+        ],
+        exp: "I (V), III (V) e IV (V) estão corretas. II (F): os quilombos mantinham trocas comerciais regulares com moradores e comerciantes das redondezas."
+      },
+      {
+        q: "Sobre cultura, identidade e religiosidade afro-brasileira, avalie cada proposição:",
+        items: [
+          { text: "O sincretismo religioso permitiu associar orixás (iorubás) e inquices (bantos) aos santos católicos para preservar suas tradições.", ans: "V" },
+          { text: "Religiões de matriz africana como o Candomblé e a Umbanda nasceram desse processo de resistência e recriação cultural no Brasil.", ans: "V" },
+          { text: "Palavras como 'moleque', 'cafuné', 'quitanda' e 'angu' são exemplos da herança linguística africana no português brasileiro.", ans: "V" },
+          { text: "A Igreja Católica colonial incentivava oficialmente os cultos aos orixás dentro das igrejas matrizes das vilas.", ans: "F" }
+        ],
+        exp: "I (V), II (V) e III (V) estão corretas. IV (F): as religiões africanas eram reprimidas pelas autoridades e pela Igreja, razão pela qual o sincretismo foi utilizado como estratégia de sobrevivência cultural."
+      }
+    ],
+    match: [
+      {
+        q: "Associe os grupos e conceitos africanos (Coluna A) às suas características correspondentes (Coluna B):",
+        colA: [
+          { id: "A", text: "Povos Sudaneses" },
+          { id: "B", text: "Povos Bantos" },
+          { id: "C", text: "Hauçás" },
+          { id: "D", text: "Navios Tumbeiros" }
+        ],
+        colB: [
+          { text: "Originários de Angola, Congo e Moçambique; deixaram profunda marca no vocabulário brasileiro.", ans: "B" },
+          { text: "Embarcações superlotadas e insalubres que transportavam africanos pelo Oceano Atlântico.", ans: "D" },
+          { text: "Originários do Golfo da Guiné (iorubás, jejes); concentraram-se sobretudo na Bahia.", ans: "A" },
+          { text: "Grupo africano de religião islâmica que sabia ler e escrever em árabe, ligado a revoltas na Bahia.", ans: "C" }
+        ],
+        exp: "Associação correta: B (Povos Bantos), D (Navios Tumbeiros), A (Povos Sudaneses) e C (Hauçás)."
+      },
+      {
+        q: "Relacione as formas de trabalho e controle (Coluna A) às suas descrições (Coluna B):",
+        colA: [
+          { id: "A", text: "Escravos de ganho" },
+          { id: "B", text: "Jornal" },
+          { id: "C", text: "Separação étnica" },
+          { id: "D", text: "Capitães do mato" }
+        ],
+        colB: [
+          { text: "Quantia diária ou semanal que o trabalhador urbano escravizado era obrigado a entregar ao senhor.", ans: "B" },
+          { text: "Homens contratados pelos proprietários para perseguir e capturar escravizados fugidos.", ans: "D" },
+          { text: "Trabalhadores que atuavam nas ruas das cidades como vendedores, carregadores ou barbeiros.", ans: "A" },
+          { text: "Estratégia dos traficantes de dividir membros da mesma família ou língua para evitar revoltas.", ans: "C" }
+        ],
+        exp: "Associação correta: B (Jornal), D (Capitães do mato), A (Escravos de ganho) e C (Separação étnica)."
+      },
+      {
+        q: "Conecte cada expressão de resistência e cultura afro-brasileira (Coluna A) ao seu significado (Coluna B):",
+        colA: [
+          { id: "A", text: "Quilombos" },
+          { id: "B", text: "Sincretismo religioso" },
+          { id: "C", text: "Resistência cotidiana" },
+          { id: "D", text: "Capoeira e Congadas" }
+        ],
+        colB: [
+          { text: "Associação entre divindades africanas (orixás/inquices) e santos católicos para preservar a fé.", ans: "B" },
+          { text: "Sabotagem de ferramentas, lentidão no trabalho ('corpo mole') e negociações no dia a dia.", ans: "C" },
+          { text: "Manifestações culturais que combinam luta, música, dança e celebração da identidade negra.", ans: "D" },
+          { text: "Comunidades organizadas de fugitivos que resistiam à escravidão e comerciavam com vizinhos.", ans: "A" }
+        ],
+        exp: "Associação correta: B (Sincretismo religioso), C (Resistência cotidiana), D (Capoeira e Congadas) e A (Quilombos)."
+      }
+    ]
+  },
+  {
+    id: 2,
+    unit: "Unidade 7 · Tema 2",
+    title: "A crise e a dependência portuguesa",
+    desc: "União Ibérica, invasões holandesas, governo Nassau, Insurreição Pernambucana e Tratado de Methuen.",
+    mc: [
+      {
+        q: "O que foi a União Ibérica (1580–1640) e qual fato deu origem a esse período?",
+        opts: [
+          "A aliança militar entre Portugal e Holanda para expulsar os espanhóis da América do Sul.",
+          "A divisão do Brasil em duas colônias independentes após a morte do rei D. João VI.",
+          "O período em que o rei Filipe II, da Espanha, assumiu também o trono português após a morte de D. Sebastião sem herdeiros.",
+          "A união comercial entre Inglaterra e França para controlar o comércio de açúcar no Nordeste."
+        ],
+        ans: 2,
+        exp: "Com o desaparecimento do jovem rei D. Sebastião (1578) e a morte do cardeal D. Henrique sem herdeiros, Filipe II da Espanha reivindicou e assumiu o trono português em 1580."
+      },
+      {
+        q: "Qual foi a principal consequência da União Ibérica para as relações comerciais entre o Brasil e os holandeses?",
+        opts: [
+          "A Espanha proibiu os holandeses (seus inimigos na Europa) de comercializar e refinar o açúcar produzido no Império Português.",
+          "Os holandeses receberam o monopólio eterno de todos os portos brasileiros por ordem de Filipe II.",
+          "Portugal encerrou toda a produção de açúcar no Nordeste para se dedicar apenas à pecuária.",
+          "Os holandeses abandonaram o comércio marítimo e passaram a comprar açúcar apenas da Inglaterra."
+        ],
+        ans: 0,
+        exp: "Como a Holanda lutava por sua independência contra a Espanha, Filipe II decretou o embargo comercial aos holandeses, excluindo-os do lucrativo negócio do açúcar brasileiro."
+      },
+      {
+        q: "Para retomar à força o controle sobre o comércio do açúcar e conquistar áreas produtoras na América, os holandeses criaram, em 1621, a:",
+        opts: [
+          "Companhia de Jesus.",
+          "Casa de Contratação de Sevilha.",
+          "Companhia Geral do Comércio do Estado do Maranhão.",
+          "Companhia das Índias Ocidentais (WIC)."
+        ],
+        ans: 3,
+        exp: "A Companhia das Índias Ocidentais (WIC) foi criada para financiar expedições militares e comerciais no Atlântico, liderando as invasões a Salvador (1624) e Pernambuco (1630)."
+      },
+      {
+        q: "Sobre as duas grandes invasões holandesas no Nordeste brasileiro, qual foi a diferença entre o ataque à Bahia (1624) e o ataque a Pernambuco (1630)?",
+        opts: [
+          "Em Salvador os holandeses permaneceram por 24 anos, enquanto em Pernambuco foram expulsos em duas semanas.",
+          "Em Salvador os holandeses foram derrotados e expulsos após cerca de um ano, enquanto em Pernambuco conquistaram o território e permaneceram até 1654.",
+          "Nenhuma das duas invasões teve sucesso, pois os holandeses nunca chegaram a desembarcar no litoral.",
+          "Em ambas as regiões os holandeses foram convidados pelos senhores de engenho para governar a colônia."
+        ],
+        ans: 1,
+        exp: "A invasão a Salvador (1624–1625) foi rapidamente contida pela reação luso-espanhola, mas a invasão a Pernambuco (1630) teve sucesso e deu origem ao Brasil Holandês."
+      },
+      {
+        q: "Durante o governo de Maurício de Nassau em Pernambuco (1637–1644), qual medida ajudou a pacificar os senhores de engenho locais e reativar a economia açucareira?",
+        opts: [
+          "A abolição imediata da escravidão em todos os engenhos do Nordeste.",
+          "A distribuição gratuita de terras dos senhores de engenho aos soldados holandeses.",
+          "A concessão de empréstimos financeiros aos senhores de engenho para reconstruírem suas propriedades e comprarem escravizados.",
+          "A proibição total do cultivo de cana-de-açúcar em Olinda e no Recife."
+        ],
+        ans: 2,
+        exp: "Nassau concedeu empréstimos aos senhores de engenho endividados pela guerra, além de garantir tolerância religiosa e investir na urbanização de Recife."
+      },
+      {
+        q: "Por que Maurício de Nassau entrou em conflito com a Companhia das Índias Ocidentais (WIC) e retornou à Europa em 1644?",
+        opts: [
+          "Porque a WIC exigia lucros imediatos e a cobrança rigorosa das dívidas dos senhores de engenho, contrariando a política de conciliação de Nassau.",
+          "Porque Nassau decidiu declarar a independência do Brasil e coroar-se imperador em Salvador.",
+          "Porque os engenhos de Pernambuco haviam sido destruídos por um terremoto em 1643.",
+          "Porque Portugal vendeu oficialmente Pernambuco para a Holanda em troca de especiarias da Índia."
+        ],
+        ans: 0,
+        exp: "Preocupada com os gastos de Nassau e a queda nos lucros, a WIC ordenou a cobrança imediata das dívidas dos senhores de engenho, levando Nassau a pedir demissão em 1644."
+      },
+      {
+        q: "O que foi a Insurreição Pernambucana (1645–1654)?",
+        opts: [
+          "Uma revolta dos soldados holandeses contra o rei da Espanha para conquistar o Rio de Janeiro.",
+          "Um movimento liderado pelos ingleses para transformar o Recife em colônia britânica.",
+          "Uma guerra civil entre os senhores de engenho da Bahia e os mineradores de Minas Gerais.",
+          "A revolta dos senhores de engenho luso-brasileiros — apoiados por indígenas e negros — contra o domínio e as cobranças da WIC, culminando na expulsão dos holandeses."
+        ],
+        ans: 3,
+        exp: "Pressionados pelas cobranças de dívidas da WIC após a saída de Nassau, senhores de engenho uniram-se a combatentes indígenas (como Filipe Camarão) e negros (como Henrique Dias), vencendo nas Batalhas dos Guararapes."
+      },
+      {
+        q: "Após serem expulsos do Brasil em 1654, o que os holandeses fizeram que provocou uma grave crise na economia açucareira brasileira?",
+        opts: [
+          "Bloquearam o porto de Lisboa durante cinquenta anos impedindo qualquer navio de sair de Portugal.",
+          "Levaram mudas de cana e técnicas de produção para as Antilhas (Caribe), passando a produzir açúcar mais barato e concorrendo diretamente com o Brasil.",
+          "Destruíram todas as plantações de cana-de-açúcar da Europa e da Ásia.",
+          "Passaram a comprar açúcar exclusivamente dos indígenas do interior da Amazônia."
+        ],
+        ans: 1,
+        exp: "Com a experiência adquirida em Pernambuco, os holandeses implantaram engenhos modernos nas Antilhas, quebrando o monopólio brasileiro e derrubando os preços do açúcar."
+      },
+      {
+        q: "Para garantir proteção militar contra a Espanha e recuperar sua economia após a Restauração (1640), Portugal aproximou-se da Inglaterra e assinou, em 1703, o Tratado de Methuen (Panos e Vinhos). O que esse tratado determinava?",
+        opts: [
+          "Portugal compraria tecidos ingleses sem impostos alfandegários, enquanto a Inglaterra compraria vinhos portugueses com tarifas reduzidas.",
+          "A Inglaterra entregaria suas colônias na América do Norte a Portugal em troca de açúcar pernambucano.",
+          "Portugal tornava-se uma província administrativa do Reino Unido e adotava a língua inglesa.",
+          "Ambos os países proibiam a entrada de ouro brasileiro nos bancos de Londres."
+        ],
+        ans: 0,
+        exp: "Pelo Tratado de Methuen (1703), Portugal abriu seu mercado aos tecidos ingleses (arruinando suas próprias manufaturas) em troca de vantagens tarifárias para seus vinhos na Inglaterra."
+      },
+      {
+        q: "Qual foi o resultado econômico do Tratado de Methuen para Portugal ao longo do século XVIII?",
+        opts: [
+          "Portugal tornou-se a maior potência industrial da Europa, exportando tecidos para Londres.",
+          "O comércio entre os dois países manteve-se perfeitamente equilibrado, sem dívidas para nenhum lado.",
+          "Portugal acumulou enormes déficits comerciais porque importava muito mais tecidos caros do que exportava vinhos, pagando a diferença com o ouro extraído do Brasil.",
+          "A Inglaterra perdoou todas as dívidas portuguesas e financiou a industrialização de Lisboa."
+        ],
+        ans: 2,
+        exp: "Como o valor dos tecidos ingleses superava muito o dos vinhos portugueses, Portugal teve grande déficit comercial e acabou transferindo grande parte do ouro do Brasil para a Inglaterra."
+      }
+    ],
+    vf: [
+      {
+        q: "Julgue as afirmativas sobre a União Ibérica (1580–1640) e seus impactos no Brasil como Verdadeiras (V) ou Falsas (F):",
+        items: [
+          { text: "A crise sucessória portuguesa começou com a morte do jovem rei D. Sebastião na Batalha de Alcácer-Quibir, em 1578.", ans: "V" },
+          { text: "Com Filipe II assumindo o trono de Portugal, as colônias portuguesas passaram a integrar o Império Espanhol.", ans: "V" },
+          { text: "Durante a União Ibérica, os limites do Tratado de Tordesilhas foram rigorosamente respeitados, impedindo qualquer avanço para o interior.", ans: "F" },
+          { text: "Por estarem sob domínio espanhol, as possessões portuguesas passaram a sofrer ataques de inimigos da Espanha, como os holandeses.", ans: "V" }
+        ],
+        exp: "I (V), II (V) e IV (V) estão corretas. III (F): com as duas coroas unidas, o Tratado de Tordesilhas perdeu efeito prático e facilitou a expansão para o interior."
+      },
+      {
+        q: "Sobre as invasões holandesas no Nordeste brasileiro, julgue cada proposição a seguir:",
+        items: [
+          { text: "A criação da Companhia das Índias Ocidentais (WIC) teve como objetivo principal retomar o controle sobre o comércio do açúcar.", ans: "V" },
+          { text: "A primeira invasão holandesa ocorreu em Salvador (1624), mas os invasores foram expulsos no ano seguinte por forças luso-espanholas.", ans: "V" },
+          { text: "Em 1630, os holandeses conquistaram Pernambuco e estenderam seu domínio do Maranhão até o rio São Francisco.", ans: "V" },
+          { text: "Os holandeses nunca chegaram a ocupar o Recife ou Olinda, limitando-se a atacar navios em alto-mar.", ans: "F" }
+        ],
+        exp: "I (V), II (V) e III (V) estão corretas. IV (F): Olinda e Recife foram conquistadas em 1630, tornando-se o centro do Brasil Holandês por 24 anos."
+      },
+      {
+        q: "Avalie as afirmações sobre a administração de Maurício de Nassau (1637–1644) no Brasil Holandês:",
+        items: [
+          { text: "Nassau concedeu empréstimos aos senhores de engenho para reconstruir as propriedades destruídas durante a guerra de conquista.", ans: "V" },
+          { text: "Garantiu liberdade de culto religioso para católicos, protestantes (calvinistas) e judeus, permitindo a primeira sinagoga das Américas no Recife.", ans: "V" },
+          { text: "Trouxe artistas e cientistas europeus, como Frans Post e Albert Eckhout, que registraram a natureza e a sociedade colonial.", ans: "V" },
+          { text: "Nassau governou Pernambuco até 1654, liderando pessoalmente a resistência holandesa nas Batalhas dos Guararapes.", ans: "F" }
+        ],
+        exp: "I (V), II (V) e III (V) estão corretas. IV (F): Nassau deixou o Brasil em 1644 após desentendimentos com os diretores da WIC."
+      },
+      {
+        q: "Julgue os itens referentes à Restauração Portuguesa (1640) e à Insurreição Pernambucana (1645–1654):",
+        items: [
+          { text: "Em 1640, os portugueses puseram fim à União Ibérica e coroaram D. João IV, dando início à dinastia de Bragança.", ans: "V" },
+          { text: "Após a saída de Nassau, a WIC passou a cobrar rigorosamente as dívidas dos senhores de engenho, motivando a revolta.", ans: "V" },
+          { text: "Na Insurreição Pernambucana, lutaram lado a lado colonos luso-brasileiros, indígenas liderados por Filipe Camarão e negros liderados por Henrique Dias.", ans: "V" },
+          { text: "A expulsão definitiva dos holandeses ocorreu em 1654, mas não teve nenhum impacto sobre a economia açucareira do Brasil.", ans: "F" }
+        ],
+        exp: "I (V), II (V) e III (V) estão corretas. IV (F): após 1654, os holandeses passaram a produzir açúcar nas Antilhas, gerando forte concorrência e crise no Brasil."
+      },
+      {
+        q: "Sobre o pós-guerra e a dependência econômica portuguesa em relação à Inglaterra, julgue os itens:",
+        items: [
+          { text: "A produção de açúcar holandesa nas Antilhas quebrou o monopólio brasileiro e derrubou o preço do produto na Europa.", ans: "V" },
+          { text: "Empobrecido pelas guerras, Portugal buscou proteção militar e apoio financeiro junto à Inglaterra.", ans: "V" },
+          { text: "O Tratado de Methuen (1703) favoreceu a industrialização de Portugal ao proibir a entrada de tecidos ingleses no país.", ans: "F" },
+          { text: "Grande parte do ouro extraído do Brasil no século XVIII acabou transferida para a Inglaterra para pagar o déficit comercial português.", ans: "V" }
+        ],
+        exp: "I (V), II (V) e IV (V) estão corretas. III (F): o Tratado de Methuen isentou de impostos os tecidos ingleses, arruinando as manufaturas portuguesas."
+      }
+    ],
+    match: [
+      {
+        q: "Associe os eventos históricos (Coluna A) aos seus respectivos marcos cronológicos (Coluna B):",
+        colA: [
+          { id: "A", text: "União Ibérica" },
+          { id: "B", text: "Invasão holandesa a Pernambuco" },
+          { id: "C", text: "Restauração Portuguesa" },
+          { id: "D", text: "Tratado de Methuen" }
+        ],
+        colB: [
+          { text: "1640 — Fim do domínio espanhol e coroação de D. João IV em Portugal.", ans: "C" },
+          { text: "1703 — Acordo de Panos e Vinhos que aprofundou a dependência portuguesa diante da Inglaterra.", ans: "D" },
+          { text: "1580–1640 — Período em que os reis da Espanha governaram também Portugal e suas colônias.", ans: "A" },
+          { text: "1630–1654 — Conquista de Olinda e Recife pela WIC e estabelecimento do Brasil Holandês.", ans: "B" }
+        ],
+        exp: "Associação correta: C (Restauração = 1640), D (Tratado de Methuen = 1703), A (União Ibérica = 1580–1640) e B (Invasão a Pernambuco = 1630–1654)."
+      },
+      {
+        q: "Relacione os personagens históricos (Coluna A) ao papel que desempenharam nesse período (Coluna B):",
+        colA: [
+          { id: "A", text: "Filipe II" },
+          { id: "B", text: "Maurício de Nassau" },
+          { id: "C", text: "Henrique Dias e Filipe Camarão" },
+          { id: "D", text: "Frans Post e Albert Eckhout" }
+        ],
+        colB: [
+          { text: "Administrador do Brasil Holandês que concedeu empréstimos, urbanizou o Recife e promoveu tolerância religiosa.", ans: "B" },
+          { text: "Pintores europeus trazidos por Nassau que retrataram paisagens, plantas e habitantes do Nordeste colonial.", ans: "D" },
+          { text: "Rei da Espanha que assumiu o trono português em 1580 e decretou o embargo comercial contra os holandeses.", ans: "A" },
+          { text: "Líderes de combatentes negros e indígenas que atuaram na Insurreição Pernambucana contra os holandeses.", ans: "C" }
+        ],
+        exp: "Associação correta: B (Maurício de Nassau), D (Frans Post e Albert Eckhout), A (Filipe II) e C (Henrique Dias e Filipe Camarão)."
+      },
+      {
+        q: "Conecte cada evento ou tratado (Coluna A) à sua consequência econômica direta (Coluna B):",
+        colA: [
+          { id: "A", text: "Embargo espanhol à Holanda" },
+          { id: "B", text: "Expulsão dos holandeses (1654)" },
+          { id: "C", text: "Tratado de Panos e Vinhos" },
+          { id: "D", text: "Cobrança de dívidas pela WIC" }
+        ],
+        colB: [
+          { text: "Transferência da produção açucareira para as Antilhas, gerando concorrência e crise no Brasil.", ans: "B" },
+          { text: "Revolta dos senhores de engenho endividados, dando início à Insurreição Pernambucana.", ans: "D" },
+          { text: "Criação da WIC e invasões militares ao Nordeste brasileiro para retomar o negócio do açúcar.", ans: "A" },
+          { text: "Ruína das manufaturas portuguesas e transferência do ouro do Brasil para a Inglaterra.", ans: "C" }
+        ],
+        exp: "Associação correta: B (Expulsão = concorrência nas Antilhas), D (Cobrança de dívidas = Insurreição), A (Embargo = criação da WIC/invasões) e C (Panos e Vinhos = saída do ouro para a Inglaterra)."
+      }
+    ]
+  }
+];
+
+// State:
+// mc: Array(10).fill(null)
+// vf: Array(5).fill({ choices: [null, null, null, null], submitted: false })
+// match: Array(3).fill({ choices: [null, null, null, null], submitted: false })
+const state = QUIZ_DATA.map(() => ({
+  mc: Array(10).fill(null),
+  vf: Array.from({ length: 5 }, () => ({ choices: [null, null, null, null], submitted: false })),
+  match: Array.from({ length: 3 }, () => ({ choices: [null, null, null, null], submitted: false }))
+}));
+
+let currentTab = 0;
+
+function computeTopicStats(tabIdx) {
+  const topic = QUIZ_DATA[tabIdx];
+  const s = state[tabIdx];
+
+  let completedQuestions = 0;
+  let totalPoints = 0;
+  // Max points per tab: 10 (MC: 1 pt each) + 5*4 (VF: 4 items each = 20) + 3*4 (Match: 4 items each = 12) = 42 itens avaliados
+  // Or also track question-level completion (out of 18)
+  const maxItems = 10 + (5 * 4) + (3 * 4); // 42
+
+  s.mc.forEach((v, i) => {
+    if (v !== null) {
+      completedQuestions++;
+      if (v === topic.mc[i].ans) totalPoints++;
+    }
+  });
+
+  s.vf.forEach((qState, i) => {
+    if (qState.submitted) {
+      completedQuestions++;
+      qState.choices.forEach((c, idx) => {
+        if (c === topic.vf[i].items[idx].ans) totalPoints++;
+      });
+    }
+  });
+
+  s.match.forEach((qState, i) => {
+    if (qState.submitted) {
+      completedQuestions++;
+      qState.choices.forEach((c, idx) => {
+        if (c === topic.match[i].colB[idx].ans) totalPoints++;
+      });
+    }
+  });
+
+  return { completedQuestions, totalPoints, maxItems };
+}
+
+function updateTabCounters() {
+  QUIZ_DATA.forEach((_, idx) => {
+    const { completedQuestions, totalPoints, maxItems } = computeTopicStats(idx);
+    const el = document.getElementById(`tab-score-${idx}`);
+    if (completedQuestions === 0) {
+      el.textContent = "0 / 18 concluídas";
+    } else {
+      el.textContent = `${completedQuestions}/18 quest. · ${totalPoints}/${maxItems} itens`;
+    }
+  });
+}
+
+function renderTab(tabIdx) {
+  currentTab = tabIdx;
+  document.querySelectorAll(".tab-btn").forEach((btn, idx) => {
+    const active = idx === tabIdx;
+    btn.classList.toggle("active", active);
+    btn.setAttribute("aria-selected", active ? "true" : "false");
+  });
+
+  const topic = QUIZ_DATA[tabIdx];
+  const s = state[tabIdx];
+  const { completedQuestions, totalPoints, maxItems } = computeTopicStats(tabIdx);
+
+  // Calculate percentage based on answered items so far
+  let answeredItemsCount = 0;
+  s.mc.forEach(v => { if (v !== null) answeredItemsCount += 1; });
+  s.vf.forEach(q => { if (q.submitted) answeredItemsCount += 4; });
+  s.match.forEach(q => { if (q.submitted) answeredItemsCount += 4; });
+
+  const pct = answeredItemsCount > 0 ? Math.round((totalPoints / answeredItemsCount) * 100) : 0;
+  const letters = ["A", "B", "C", "D"];
+  const romans = ["I.", "II.", "III.", "IV."];
+
+  let html = `
+    <div class="status-bar">
+      <div class="status-info">
+        <h2>${topic.unit} — ${topic.title}</h2>
+        <p>${topic.desc}</p>
+      </div>
+      <div class="status-metrics">
+        <div class="metric">
+          <span class="metric-val">${completedQuestions}/18</span>
+          <span class="metric-lbl">Questões</span>
+        </div>
+        <div class="metric">
+          <span class="metric-val">${totalPoints}/${maxItems}</span>
+          <span class="metric-lbl">Itens (${pct}%)</span>
+        </div>
+        <button class="btn-reset" onclick="resetCurrentTab()">Reiniciar aba</button>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h3>Parte I · Múltipla Escolha (Questões 01 a 10)</h3>
+      <div class="line"></div>
+    </div>
+  `;
+
+  // 1. Múltipla Escolha
+  topic.mc.forEach((item, qIdx) => {
+    const chosen = s.mc[qIdx];
+    const isAnswered = chosen !== null;
+    const isCorrect = isAnswered && chosen === item.ans;
+    const cardState = !isAnswered ? "" : (isCorrect ? "answered-ok" : "answered-err");
+
+    html += `
+      <article class="q-card ${cardState}">
+        <div class="q-header">
+          <span class="q-num">Questão ${String(qIdx + 1).padStart(2, "0")} · Múltipla Escolha</span>
+          <span class="q-badge ok">✓ Resposta correta</span>
+          <span class="q-badge err">✕ Resposta incorreta</span>
+        </div>
+        <p class="q-text">${item.q}</p>
+        <div class="options-list">
+          ${item.opts.map((optText, oIdx) => {
+            let cls = "opt-btn";
+            if (isAnswered) {
+              if (oIdx === item.ans) cls += " correct";
+              else if (oIdx === chosen) cls += " wrong";
+              else cls += " dimmed";
+            }
+            return `
+              <button class="${cls}" ${isAnswered ? "disabled" : ""} onclick="answerMc(${qIdx}, ${oIdx})">
+                <span class="opt-letter">${letters[oIdx]}</span>
+                <span>${optText}</span>
+              </button>
+            `;
+          }).join("")}
+        </div>
+        <div class="feedback ${isAnswered ? "show" : ""}">
+          <strong>Comentário:</strong> ${item.exp}
+        </div>
+      </article>
+    `;
+  });
+
+  // 2. Verdadeiro ou Falso Composto (4 itens por questão)
+  html += `
+    <div class="section-head">
+      <h3>Parte II · Verdadeiro ou Falso Composto — 4 itens por questão (Questões 11 a 15)</h3>
+      <div class="line"></div>
+    </div>
+  `;
+
+  topic.vf.forEach((item, qIdx) => {
+    const qState = s.vf[qIdx];
+    const allFilled = qState.choices.every(c => c !== null);
+    let hits = 0;
+    if (qState.submitted) {
+      qState.choices.forEach((c, idx) => { if (c === item.items[idx].ans) hits++; });
+    }
+    const cardState = !qState.submitted ? "" : (hits === 4 ? "answered-ok" : (hits >= 2 ? "answered-partial" : "answered-err"));
+
+    html += `
+      <article class="q-card ${cardState}">
+        <div class="q-header">
+          <span class="q-num">Questão ${String(qIdx + 11).padStart(2, "0")} · Verdadeiro ou Falso (4 itens)</span>
+          <span class="q-badge ok">✓ 4/4 itens corretos</span>
+          <span class="q-badge partial">◐ ${hits}/4 itens corretos</span>
+          <span class="q-badge err">✕ ${hits}/4 itens corretos</span>
+        </div>
+        <p class="q-text">${item.q}</p>
+        <div class="vf-group">
+          ${item.items.map((sub, iIdx) => {
+            const val = qState.choices[iIdx];
+            const isSubOk = qState.submitted && val === sub.ans;
+            const rowCls = !qState.submitted ? "" : (isSubOk ? "row-ok" : "row-err");
+
+            let btnVCls = "vf-pill";
+            let btnFCls = "vf-pill";
+            if (!qState.submitted) {
+              if (val === "V") btnVCls += " selected";
+              if (val === "F") btnFCls += " selected";
+            } else {
+              if (sub.ans === "V") btnVCls += " res-correct";
+              else if (val === "V") btnVCls += " res-wrong";
+
+              if (sub.ans === "F") btnFCls += " res-correct";
+              else if (val === "F") btnFCls += " res-wrong";
+            }
+
+            return `
+              <div class="vf-row ${rowCls}">
+                <div class="vf-stmt">
+                  <span class="roman">${romans[iIdx]}</span>${sub.text}
+                  ${qState.submitted ? `<span class="vf-ans-tag ${isSubOk ? "ok" : "err"}">${isSubOk ? "✓ Correto" : `✕ Gabarito: ${sub.ans}`}</span>` : ""}
+                </div>
+                <div class="vf-toggles">
+                  <button class="${btnVCls}" ${qState.submitted ? "disabled" : ""} onclick="selectVfItem(${qIdx}, ${iIdx}, 'V')">V</button>
+                  <button class="${btnFCls}" ${qState.submitted ? "disabled" : ""} onclick="selectVfItem(${qIdx}, ${iIdx}, 'F')">F</button>
+                </div>
+              </div>
+            `;
+          }).join("")}
+        </div>
+        ${!qState.submitted ? `
+          <button class="btn-check" ${!allFilled ? "disabled" : ""} onclick="submitVf(${qIdx})">
+            ${allFilled ? "Verificar respostas" : "Marque V ou F nos 4 itens para verificar"}
+          </button>
+        ` : ""}
+        <div class="feedback ${qState.submitted ? "show" : ""}">
+          <strong>Comentário:</strong> ${item.exp}
+        </div>
+      </article>
+    `;
+  });
+
+  // 3. Associação entre Colunas (3 questões)
+  html += `
+    <div class="section-head">
+      <h3>Parte III · Associação entre Colunas (Questões 16 a 18)</h3>
+      <div class="line"></div>
+    </div>
+  `;
+
+  topic.match.forEach((item, qIdx) => {
+    const qState = s.match[qIdx];
+    const allFilled = qState.choices.every(c => c !== null && c !== "");
+    let hits = 0;
+    if (qState.submitted) {
+      qState.choices.forEach((c, idx) => { if (c === item.colB[idx].ans) hits++; });
+    }
+    const cardState = !qState.submitted ? "" : (hits === 4 ? "answered-ok" : (hits >= 2 ? "answered-partial" : "answered-err"));
+
+    html += `
+      <article class="q-card ${cardState}">
+        <div class="q-header">
+          <span class="q-num">Questão ${String(qIdx + 16).padStart(2, "0")} · Associação de Colunas</span>
+          <span class="q-badge ok">✓ 4/4 associações corretas</span>
+          <span class="q-badge partial">◐ ${hits}/4 associações corretas</span>
+          <span class="q-badge err">✕ ${hits}/4 associações corretas</span>
+        </div>
+        <p class="q-text">${item.q}</p>
+        <div class="match-layout">
+          <div class="match-col-a">
+            <div class="match-col-title">Coluna A · Conceitos / Eventos</div>
+            ${item.colA.map(ca => `
+              <div class="col-a-item">
+                <span class="col-a-badge">${ca.id}</span>
+                <span>${ca.text}</span>
+              </div>
+            `).join("")}
+          </div>
+          <div class="match-col-b">
+            <div class="match-col-title">Coluna B · Relacione a letra correspondente</div>
+            ${item.colB.map((cb, rIdx) => {
+              const chosen = qState.choices[rIdx] || "";
+              const isRowOk = qState.submitted && chosen === cb.ans;
+              const rowCls = !qState.submitted ? "" : (isRowOk ? "row-ok" : "row-err");
+              return `
+                <div class="match-row ${rowCls}">
+                  <select class="match-select" aria-label="Selecionar letra para o item ${rIdx + 1}" ${qState.submitted ? "disabled" : ""} onchange="selectMatchItem(${qIdx}, ${rIdx}, this.value)">
+                    <option value="" ${chosen === "" ? "selected" : ""}>( ? )</option>
+                    ${item.colA.map(ca => `<option value="${ca.id}" ${chosen === ca.id ? "selected" : ""}>( ${ca.id} )</option>`).join("")}
+                  </select>
+                  <div class="match-desc">
+                    ${cb.text}
+                    ${qState.submitted ? `<span class="vf-ans-tag ${isRowOk ? "ok" : "err"}">${isRowOk ? "✓ Correto" : `✕ Gabarito: (${cb.ans})`}</span>` : ""}
+                  </div>
+                </div>
+              `;
+            }).join("")}
+          </div>
+        </div>
+        ${!qState.submitted ? `
+          <button class="btn-check" ${!allFilled ? "disabled" : ""} onclick="submitMatch(${qIdx})">
+            ${allFilled ? "Verificar associações" : "Preencha as 4 associações para verificar"}
+          </button>
+        ` : ""}
+        <div class="feedback ${qState.submitted ? "show" : ""}">
+          <strong>Comentário:</strong> ${item.exp}
+        </div>
+      </article>
+    `;
+  });
+
+  const finished = completedQuestions === 18;
+  let perfMsg = "";
+  if (finished) {
+    if (pct >= 85) perfMsg = "Excelente desempenho! Você domina todos os formatos de questão deste tema para a prova.";
+    else if (pct >= 65) perfMsg = "Bom resultado! Revise os comentários dos itens em que houve erro para consolidar o conteúdo.";
+    else perfMsg = "Vale a pena reler o esquema visual da aula e refazer esta bateria de exercícios.";
+  }
+
+  html += `
+    <div class="summary-box ${finished ? "show" : ""}">
+      <div>
+        <h4>Tema concluído: ${totalPoints} de ${maxItems} itens corretos (${pct}%)</h4>
+        <p>${perfMsg}</p>
+      </div>
+      <button class="btn-reset" onclick="resetCurrentTab()">Refazer este tema</button>
+    </div>
+  `;
+
+  document.getElementById("quiz-workspace").innerHTML = html;
+  updateTabCounters();
+}
+
+window.answerMc = function(qIdx, oIdx) {
+  if (state[currentTab].mc[qIdx] !== null) return;
+  state[currentTab].mc[qIdx] = oIdx;
+  renderTab(currentTab);
+};
+
+window.selectVfItem = function(qIdx, iIdx, val) {
+  if (state[currentTab].vf[qIdx].submitted) return;
+  state[currentTab].vf[qIdx].choices[iIdx] = val;
+  renderTab(currentTab);
+};
+
+window.submitVf = function(qIdx) {
+  const qState = state[currentTab].vf[qIdx];
+  if (qState.submitted || qState.choices.some(c => c === null)) return;
+  qState.submitted = true;
+  renderTab(currentTab);
+};
+
+window.selectMatchItem = function(qIdx, rIdx, val) {
+  if (state[currentTab].match[qIdx].submitted) return;
+  state[currentTab].match[qIdx].choices[rIdx] = val === "" ? null : val;
+  renderTab(currentTab);
+};
+
+window.submitMatch = function(qIdx) {
+  const qState = state[currentTab].match[qIdx];
+  if (qState.submitted || qState.choices.some(c => c === null || c === "")) return;
+  qState.submitted = true;
+  renderTab(currentTab);
+};
+
+window.resetCurrentTab = function() {
+  state[currentTab] = {
+    mc: Array(10).fill(null),
+    vf: Array.from({ length: 5 }, () => ({ choices: [null, null, null, null], submitted: false })),
+    match: Array.from({ length: 3 }, () => ({ choices: [null, null, null, null], submitted: false }))
+  };
+  renderTab(currentTab);
+};
+
+document.querySelectorAll(".tab-btn").forEach((btn, idx) => {
+  btn.addEventListener("click", () => renderTab(idx));
+});
+
+renderTab(0);
+</script>
+</body>
+</html>
